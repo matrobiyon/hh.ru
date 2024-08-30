@@ -1,15 +1,16 @@
 package tj.example.effectivemobile
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import dagger.hilt.android.AndroidEntryPoint
 import tj.example.effectivemobile.databinding.ActivityMainBinding
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -35,15 +36,14 @@ class MainActivity : AppCompatActivity() {
 
 
         bottomNavView.setOnItemSelectedListener {
-            Log.d("TAG", "onCreate: title ${it.title}")
-            Log.d("TAG", "onCreate:  id ${it.itemId}")
-            Log.d("TAG", "onCreate:  search ${R.id.searchFragment}")
-            Log.d("TAG", "onCreate: favourite ${R.id.favouriteFragment}")
             when (it.itemId) {
                 R.id.search -> {
-                    checkIfEntered(hasEnteredAccount, navController, R.id.searchFragment)
+                    checkIfEntered(
+                        hasEnteredAccount,
+                        navController,
+                        R.id.searchFragment
+                    )
                 }
-
                 R.id.favourite -> {
                     checkIfEntered(hasEnteredAccount, navController, R.id.favouriteFragment)
                 }
@@ -62,10 +62,10 @@ fun checkIfEntered(
 ): Boolean {
 
     if (hasEnteredAccount) {
-        navController.popBackStack(navController.currentDestination?.id?:fragmentId,true)
+        navController.popBackStack(navController.currentDestination?.id ?: fragmentId, true)
         navController.navigate(fragmentId)
     } else {
-        navController.popBackStack(navController.currentDestination?.id?:R.id.authFragment, true)
+        navController.popBackStack(navController.currentDestination?.id ?: R.id.authFragment, true)
         navController.navigate(R.id.authFragment)
     }
     return true

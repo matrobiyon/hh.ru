@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="4dp"
+    android:layout_marginVertical="8dp"
+    android:backgroundTint="@color/grey_1"
+    app:cardCornerRadius="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/people_observe"
+            style="@style/Title4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Сейчас просматривает 1 человек"
+            android:textColor="@color/green"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/Title3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:text="UI/UX Designer"
+            android:textColor="@color/white"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/people_observe" />
+
+        <TextView
+            android:id="@+id/city"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dp"
+            android:text="Minsk"
+            android:textColor="@color/white"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title" />
+
+        <TextView
+            android:id="@+id/company_name"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dp"
+            android:text="Mobiriks"
+            android:textColor="@color/white"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/city" />
+
+        <ImageView
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="2dp"
+            android:src="@drawable/ic_checked_company"
+            app:layout_constraintBottom_toBottomOf="@id/company_name"
+            app:layout_constraintStart_toEndOf="@id/company_name" />
+
+        <ImageView
+            android:id="@+id/experience_icon"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="4dp"
+            android:src="@drawable/ic_experience"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/company_name" />
+
+        <TextView
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="Опыт от 1 года до 3 лет"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@id/experience_icon"
+            app:layout_constraintTop_toTopOf="@id/experience_icon"
+            app:layout_constraintStart_toEndOf="@id/experience_icon"
+            />
+
+        <TextView
+            android:id="@+id/publish_date"
+            style="@style/Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Опубликовано 20 февраля"
+            android:textColor="@color/grey_3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/experience_icon" />
+
+        <ImageView
+            android:id="@+id/liked_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_liked_yes"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:background="@drawable/rounded_button_green"
+            android:text="Откликнуться"
+            android:textColor="@color/white"
+            style="@style/ButtonText2"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/publish_date"
+            android:layout_marginTop="16dp"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

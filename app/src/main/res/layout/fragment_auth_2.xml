@@ -13,10 +13,11 @@
 
 
     <TextView
+        android:id="@+id/email"
         style="@style/Title2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Отправили код на example@mail.ru"
+        android:text="@string/email"
         android:textColor="@color/white" />
 
     <TextView

@@ -55,7 +55,6 @@ class Auth1Fragment : Fragment() {
         binding.buttonNext.setOnClickListener {
             if (binding.editTextAuth1.text?.toString()?.trim()?.isNotEmpty() == true) {
                 if (isValidEmail(binding.editTextAuth1.text.toString().trim())) {
-                    (requireActivity() as MainActivity).hasEnteredAccount = true
                     val directions =
                         Auth1FragmentDirections.actionAuthFragmentToAuthOtpFragment(email = binding.editTextAuth1.text.toString())
                     findNavController().navigate(directions)
