@@ -28,6 +28,8 @@ class SearchViewModel @Inject constructor(
     var isLoading = MutableLiveData<Boolean>(false)
         private set
 
+    var isExpanded = MutableLiveData<Boolean?>(null)
+
     init {
         getDataLocally()
     }
@@ -45,7 +47,6 @@ class SearchViewModel @Inject constructor(
                 }
             }
         }
-
     }
 
     fun getDataRemotely() {
@@ -69,7 +70,6 @@ class SearchViewModel @Inject constructor(
                     }
 
                     is Resource.Error -> {
-                        Log.d("TAG", "getDataRemotely: ${res.message}")
                         isLoading.value = false
                     }
                 }

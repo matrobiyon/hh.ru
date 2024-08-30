@@ -1,7 +1,6 @@
 package tj.example.effectivemobile.search.presentation.screen
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,9 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
+import tj.example.effectivemobile.R
 import tj.example.effectivemobile.databinding.FragmentSearchBinding
+import tj.example.effectivemobile.search.data.remote.models.Vacancy
 import tj.example.effectivemobile.search.data.remote.models.VacancyModel
 import tj.example.effectivemobile.search.presentation.adapter.OffersAdapter
 import tj.example.effectivemobile.search.presentation.adapter.VacanciesAdapter
@@ -22,7 +23,9 @@ class SearchFragment : Fragment() {
     private lateinit var binding: FragmentSearchBinding
     private val viewModel: SearchViewModel by viewModels()
     private val offerAdapter = OffersAdapter()
-    private val vacanciesAdapter = VacanciesAdapter()
+    private val vacanciesAdapter = VacanciesAdapter {
+        viewModel.isExpanded.value = true
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,28 +43,65 @@ class SearchFragment : Fragment() {
         binding.rvVacancies.adapter = vacanciesAdapter
 
         observeViewModel()
+        onClickListener()
 
+    }
+
+    private fun onClickListener() {
+        binding.apply {
+            tabIcon.setOnClickListener {
+                if (viewModel.isExpanded.value == true) {
+                    viewModel.isExpanded.value = false
+                }
+            }
+        }
     }
 
     private fun observeViewModel() {
 
-        viewModel.offers.observe(viewLifecycleOwner) { res ->
-            Log.d("TAG", "observeViewModel: $res")
-            offerAdapter.submitList(res)
-        }
+        viewModel.apply {
+            offers.observe(viewLifecycleOwner) { res ->
+                offerAdapter.submitList(res)
+            }
 
-        viewModel.vacancies.observe(viewLifecycleOwner) { res ->
-            val newList = mutableListOf<VacancyModel>()
-            newList.addAll(res.map { VacancyModel(data = it) })
-            newList.add(VacancyModel(data = null, button = true))
-            vacanciesAdapter.submitList(newList)
-        }
+            vacancies.observe(viewLifecycleOwner) { res ->
+                vacanciesAdapter.submitList(addButtonToList(res))
+                binding.vacancyCount.text = VacanciesAdapter.getVacanciesSklonenie(res.count())
+            }
 
-        viewModel.isLoading.observe(viewLifecycleOwner) { res ->
-            binding.progressBar.isVisible = res
+            isLoading.observe(viewLifecycleOwner) { res ->
+                binding.progressBar.isVisible = res
+            }
+
+            isExpanded.observe(viewLifecycleOwner) { res ->
+                if (res == true) {
+                    vacanciesAdapter.submitList(viewModel.vacancies.value?.map { VacancyModel(it) })
+                    binding.rvOffers.isVisible = false
+                    binding.extraInfo.isVisible = true
+                    binding.tabIcon.setImageResource(R.drawable.ic_back)
+                    binding.rvOffers.isVisible = false
+                    binding.vacanciesTitle.isVisible = false
+
+                } else if (res == false) {
+                    binding.extraInfo.isVisible = false
+                    binding.rvOffers.isVisible = true
+                    binding.tabIcon.setImageResource(R.drawable.ic_search)
+                    binding.rvOffers.isVisible = true
+                    binding.vacanciesTitle.isVisible = true
+                    vacanciesAdapter.submitList(viewModel.vacancies.value?.let { addButtonToList(it) })
+                }
+            }
+
         }
 
     }
 
+}
+
+fun addButtonToList(list: List<Vacancy>): List<VacancyModel> {
+    val newList = mutableListOf<VacancyModel>()
+    newList.addAll(list.take(3).map { VacancyModel(data = it) })
+    newList.add(VacancyModel(data = null, button = true))
+    return newList
 }
 

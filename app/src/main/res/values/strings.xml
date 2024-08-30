@@ -3,5 +3,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="email">Отправили код на %1$s</string>
-    <string name="more_vacancy">Ещё %s вакансий</string>
+    <string name="more_vacancy">Ещё %1$s</string>
+    <string name="observing_people">Сейчас просматривает %1$s %2$s</string>
 </resources>
