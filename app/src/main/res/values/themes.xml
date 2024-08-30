@@ -1,0 +1,17 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.EffectiveMobile" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+
+    </style>
+
+    <style name="NavBarCustom" parent="Base.Theme.EffectiveMobile">
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorOnSurface">@color/gray</item>
+        <item name="colorOnSecondaryContainer">@color/blue</item>
+        <item name="colorSecondaryContainer">@android:color/transparent</item>
+
+    </style>
+
+    <style name="Theme.EffectiveMobile" parent="Base.Theme.EffectiveMobile" />
+</resources>

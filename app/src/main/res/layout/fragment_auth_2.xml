@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical"
+    android:paddingStart="16dp"
+    android:paddingTop="150dp"
+    android:paddingEnd="16dp"
+    tools:context=".auth.presentation.screen.Auth2Fragment">
+
+
+    <TextView
+        style="@style/Title2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Отправили код на example@mail.ru"
+        android:textColor="@color/white" />
+
+    <TextView
+        style="@style/Title3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:text="Напишите его, чтобы подтвердить, что это вы, а не кто-то другой входит в личный кабинет"
+        android:textColor="@color/white" />
+
+    <tj.example.effectivemobile.auth.presentation.screen.components.OTPinMaster
+        android:id="@+id/otp_test"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:layout_marginTop="16dp"
+        app:activeRectangleColor="@color/blue"
+        app:circleColor="@color/green"
+        app:inactiveRectangleColor="@color/grey_2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:rectangleCount="4"
+        app:rectangleHeight="100dp"
+        app:rectangleWidth="100dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/selector_button"
+        android:enabled="false"
+        android:text="Продолжить"
+        android:textAppearance="@style/ButtonText2"
+        android:textColor="@drawable/selector_button_text" />
+
+
+</LinearLayout>
