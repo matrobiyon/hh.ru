@@ -10,7 +10,9 @@ import tj.example.effectivemobile.search.data.remote.models.Offer
 import tj.example.effectivemobile.search.data.remote.models.Result
 import tj.example.effectivemobile.search.data.remote.models.Vacancy
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class MainRepository @Inject constructor(
     private val api: MainApi,
     private val offerDao: OfferDao,
@@ -21,6 +23,10 @@ class MainRepository @Inject constructor(
         callGenericRequest {
             api.getData()
         }
+
+    suspend fun getDataById(id : String) : List<Vacancy> {
+        return vacancyDao.getVacanciesById(id)
+    }
 
     suspend fun getOffersLocally(): List<Offer> {
         return offerDao.getData()

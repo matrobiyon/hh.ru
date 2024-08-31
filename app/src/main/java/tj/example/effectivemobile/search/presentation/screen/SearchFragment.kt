@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import tj.example.effectivemobile.R
 import tj.example.effectivemobile.databinding.FragmentSearchBinding
@@ -23,9 +24,8 @@ class SearchFragment : Fragment() {
     private lateinit var binding: FragmentSearchBinding
     private val viewModel: SearchViewModel by viewModels()
     private val offerAdapter = OffersAdapter()
-    private val vacanciesAdapter = VacanciesAdapter {
-        viewModel.isExpanded.value = true
-    }
+
+    private lateinit var vacanciesAdapter : VacanciesAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +33,12 @@ class SearchFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentSearchBinding.inflate(layoutInflater)
+        vacanciesAdapter = VacanciesAdapter(clickedMoreVacancyButton = {
+            viewModel.isExpanded.value = true
+        }, clickedVacancy = { id ->
+            val actions = SearchFragmentDirections.actionSearchFragmentToDetailsFragment(id)
+            findNavController().navigate(actions)
+        })
         return binding.root
     }
 

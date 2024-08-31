@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical"
+    tools:context=".favourite.presentation.screen.FavouriteFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="Favourite">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="8dp"
+            android:src="@drawable/ic_observe" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="8dp"
+            android:src="@drawable/ic_share" />
+
+        <ImageView
+            android:id="@+id/liked_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="8dp"
+            android:src="@drawable/ic_liked_no" />
+
+    </LinearLayout>
+
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:indeterminateTint="@color/green"
+        android:visibility="gone" />
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingHorizontal="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/title"
+                style="@style/Title1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="UI/UX Designer"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/salary"
+                style="@style/Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:text="Уровень дохода не указан"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/experience"
+                style="@style/Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:text="Требуемый опыт: от 1 года до 3 лет"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/schedule"
+                style="@style/Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                android:text="Полная занятость, полный день"
+                android:textColor="@color/white" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="16dp"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:id="@+id/applies_container"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_button_green_dark"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="8dp">
+
+                    <TextView
+                        android:id="@+id/applied_people"
+                        style="@style/Text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="147 человек уже откликнулись"
+                        android:textColor="@color/white" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/icon_parent"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        app:cardBackgroundColor="@color/green"
+                        app:cardCornerRadius="20dp">
+
+                        <ImageView
+                            android:id="@+id/icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:padding="3dp"
+                            android:src="@drawable/ic_profile"
+                            app:tint="@color/white"
+
+                            />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/observing_people_container"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_button_green_dark"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="8dp">
+
+                    <TextView
+                        android:id="@+id/observing_people"
+                        style="@style/Text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="2 человека сейчас смотрят"
+                        android:textColor="@color/white" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/icon_observe"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        app:cardBackgroundColor="@color/green"
+                        app:cardCornerRadius="20dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:padding="3dp"
+                            android:src="@drawable/ic_observe"
+                            app:tint="@color/white" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_edittext_background"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp">
+
+                <TextView
+                    android:id="@+id/company"
+                    style="@style/Title3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Мобирикс"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="4dp"
+                    android:src="@drawable/ic_checked_company"
+                    app:layout_constraintBottom_toBottomOf="@id/company"
+                    app:layout_constraintStart_toEndOf="@id/company"
+                    app:layout_constraintTop_toTopOf="@id/company" />
+
+                <ImageView
+                    android:id="@+id/map"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/map"
+                    app:layout_constraintTop_toBottomOf="@id/company" />
+
+                <TextView
+                    android:id="@+id/address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Минск, улица Бирюзова, 4/5"
+                    android:textColor="@color/white"
+                    app:layout_constraintTop_toBottomOf="@id/map"
+
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/description"
+                style="@style/Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="MOBYRIX - динамично развивающаяся продуктовая IT-компания, специализирующаяся на разработке мобильных приложений для iOS и Android. Наша команда работает над собственными продуктами в разнообразных сферах: от утилит до развлечений и бизнес-приложений. Мы ценим талант и стремление к инновациям и в данный момент в поиске талантливого UX/UI Designer, готового присоединиться к нашей команде и внести значимый вклад в развитие наших проектов."
+                android:textColor="@color/white" />
+
+            <TextView
+                style="@style/Title1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Ваши задачи"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/responsibilities"
+                style="@style/Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="-Проектировать пользовательский опыт, проводить UX исследования; -Разрабатывать адаптивный дизайн интерфейса для мобильных приложений; -Разрабатывать быстрые прототипы для тестирования идеи дизайна и их последующая; интеграция на основе обратной связи от команды и пользователей; -Взаимодействовать с командой разработчиков для обеспечения точной реализации ваших дизайнов; -Анализ пользовательского опыта и адаптация под тренды."
+                android:textColor="@color/white" />
+
+            <TextView
+                style="@style/Title4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="Задайте вопрос работодателю"
+                android:textColor="@color/white" />
+
+            <TextView
+                style="@style/Title4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Он получит его с откликом на вакансию"
+                android:textColor="@color/grey_3" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chip_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:selectionRequired="false">
+
+
+            </com.google.android.material.chip.ChipGroup>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <TextView
+            style="@style/ButtonText1"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/rounded_button_green_small"
+            android:gravity="center"
+            android:text="Откликнуться"
+            android:textColor="@color/white" />
+
+    </FrameLayout>
+
+</LinearLayout>

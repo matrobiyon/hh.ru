@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
+    app:cardBackgroundColor="@color/grey_1"
     android:layout_marginVertical="8dp"
-    android:backgroundTint="@color/grey_1"
     app:cardCornerRadius="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -108,6 +108,7 @@
             />
 
         <TextView
+            android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="42dp"
             android:background="@drawable/rounded_button_green"

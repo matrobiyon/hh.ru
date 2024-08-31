@@ -14,7 +14,8 @@ import tj.example.effectivemobile.search.data.remote.models.Vacancy
 import tj.example.effectivemobile.search.data.remote.models.VacancyModel
 
 class VacanciesAdapter(
-    private val clickedVacancies: () -> Unit
+    private val clickedMoreVacancyButton: () -> Unit,
+    private val clickedVacancy: (id : String) -> Unit
 ) :
     ListAdapter<VacancyModel, ViewHolder>(VacanciesDiffUtil()) {
 
@@ -25,6 +26,10 @@ class VacanciesAdapter(
 
             binding.apply {
 
+                button.setOnClickListener{}
+                root.setOnClickListener {
+                    clickedVacancy(currentList[adapterPosition].data?.id?:"")
+                }
                 //Observe people
                 peopleObserve.text = binding.root.context.getString(
                     R.string.observing_people, item.lookingNumber.toString(),
@@ -50,6 +55,7 @@ class VacanciesAdapter(
                 experience.text = item.experience.previewText
                 publishDate.text = formatPublishedDate(item.publishedDate)
 
+
             }
         }
     }
@@ -63,7 +69,7 @@ class VacanciesAdapter(
                     R.string.more_vacancy, (getVacanciesSklonenie(currentList.size - 1))
                 )
             binding.root.setOnClickListener {
-                clickedVacancies()
+                clickedMoreVacancyButton()
             }
         }
     }
@@ -108,21 +114,19 @@ class VacanciesAdapter(
                 else -> "вакансий"
             }
         }
+        fun getPersonSklonenie(lookingNumber: Int): String {
+            val lastDigit = lookingNumber % 10
+            val lastTwoDigits = lookingNumber % 100
+
+            return when {
+                lastDigit == 1 && lastTwoDigits != 11 -> "человек"
+                lastDigit in 2..4 && lastTwoDigits !in 12..14 -> "человека"
+                else -> "человек"
+            }
+        }
     }
 
 
-}
-
-
-fun getPersonSklonenie(lookingNumber: Int): String {
-    val lastDigit = lookingNumber % 10
-    val lastTwoDigits = lookingNumber % 100
-
-    return when {
-        lastDigit == 1 && lastTwoDigits != 11 -> "человек"
-        lastDigit in 2..4 && lastTwoDigits !in 12..14 -> "человека"
-        else -> "человек"
-    }
 }
 
 fun formatPublishedDate(publishedDate: String): String {

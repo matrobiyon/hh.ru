@@ -20,7 +20,6 @@ class SearchModule {
 
     private val BASE_URL = "https://drive.usercontent.google.com/"
 
-
     @Inject
     lateinit var db: MainDB
 
