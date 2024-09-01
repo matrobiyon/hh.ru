@@ -20,4 +20,7 @@ interface VacancyDao {
     @Query("SELECT * FROM vacancy where id = :id")
     suspend fun getVacanciesById(id : String): List<Vacancy>
 
+    @Query("UPDATE vacancy SET isFavorite =:prevStatus WHERE id = :id")
+    fun changeStatus(prevStatus: Boolean, id: String)
+
 }

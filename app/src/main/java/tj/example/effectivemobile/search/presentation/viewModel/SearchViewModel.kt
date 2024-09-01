@@ -12,6 +12,7 @@ import tj.example.effectivemobile.core.Resource
 import tj.example.effectivemobile.search.data.remote.models.Offer
 import tj.example.effectivemobile.search.data.remote.models.Vacancy
 import tj.example.effectivemobile.search.data.repository.MainRepository
+import tj.example.effectivemobile.search.presentation.adapter.VacanciesAdapter
 import javax.inject.Inject
 
 @HiltViewModel
@@ -75,5 +76,12 @@ class SearchViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+     fun changeStatus(prevStatus : Boolean, id : String,) {
+         viewModelScope.launch(Dispatchers.IO) {
+            repository.changeStatus(prevStatus,id)
+
+         }
     }
 }

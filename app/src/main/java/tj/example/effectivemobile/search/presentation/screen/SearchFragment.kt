@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
 import tj.example.effectivemobile.R
 import tj.example.effectivemobile.databinding.FragmentSearchBinding
@@ -25,7 +26,7 @@ class SearchFragment : Fragment() {
     private val viewModel: SearchViewModel by viewModels()
     private val offerAdapter = OffersAdapter()
 
-    private lateinit var vacanciesAdapter : VacanciesAdapter
+    private lateinit var vacanciesAdapter: VacanciesAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +39,8 @@ class SearchFragment : Fragment() {
         }, clickedVacancy = { id ->
             val actions = SearchFragmentDirections.actionSearchFragmentToDetailsFragment(id)
             findNavController().navigate(actions)
+        }, onLikedClicked = { prevStatus: Boolean, id: String ->
+            viewModel.changeStatus(prevStatus, id)
         })
         return binding.root
     }
@@ -45,6 +48,8 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val bottomSheet = BottomSheetDialog(requireActivity().applicationContext)
+        
         binding.rvOffers.adapter = offerAdapter
         binding.rvVacancies.adapter = vacanciesAdapter
 

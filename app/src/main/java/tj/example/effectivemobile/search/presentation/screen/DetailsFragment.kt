@@ -17,6 +17,7 @@ import tj.example.effectivemobile.R
 import tj.example.effectivemobile.databinding.ChipItemBinding
 import tj.example.effectivemobile.databinding.FragmentDetailsBinding
 import tj.example.effectivemobile.search.presentation.adapter.VacanciesAdapter
+import tj.example.effectivemobile.search.presentation.screen.bottomsheet.BottomSheetFragment
 import tj.example.effectivemobile.search.presentation.viewModel.DetailViewModel
 import java.util.Locale
 
@@ -26,6 +27,7 @@ class DetailsFragment : Fragment() {
     private lateinit var binding: FragmentDetailsBinding
     private val args by navArgs<DetailsFragmentArgs>()
     private val viewModel : DetailViewModel by viewModels()
+    private lateinit var bottomSheetFragment: BottomSheetFragment
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -87,6 +89,12 @@ class DetailsFragment : Fragment() {
                     val chip = createChip(questions)
                     chipGroup.addView(chip)
                 }
+
+                applyButton.setOnClickListener {
+                    bottomSheetFragment = BottomSheetFragment()
+                    bottomSheetFragment.show(parentFragmentManager, BOTTOM_SHEET)
+                }
+
             }
 
         }
@@ -95,7 +103,15 @@ class DetailsFragment : Fragment() {
     fun createChip(question : String) : Chip {
         val chip = ChipItemBinding.inflate(layoutInflater).root
         chip.text = question
+        chip.setOnClickListener {
+            bottomSheetFragment = BottomSheetFragment(question)
+            bottomSheetFragment.show(parentFragmentManager, BOTTOM_SHEET)
+        }
         return chip
+    }
+
+    companion object {
+        const val BOTTOM_SHEET = "bottom_sheet"
     }
 
 }

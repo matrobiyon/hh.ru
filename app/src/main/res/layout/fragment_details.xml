@@ -226,7 +226,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/map"
+                    android:src="@raw/map"
                     app:layout_constraintTop_toBottomOf="@id/company" />
 
                 <TextView
@@ -302,6 +302,7 @@
         android:padding="16dp">
 
         <TextView
+            android:id="@+id/apply_button"
             style="@style/ButtonText1"
             android:layout_width="match_parent"
             android:layout_height="48dp"

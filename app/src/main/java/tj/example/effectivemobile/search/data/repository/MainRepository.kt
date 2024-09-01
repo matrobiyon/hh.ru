@@ -44,4 +44,8 @@ class MainRepository @Inject constructor(
         if (list.isNotEmpty()) vacancyDao.saveVacancies(list.map { it!! })
     }
 
+    suspend fun changeStatus(prevStatus: Boolean, id: String) {
+        vacancyDao.changeStatus(!prevStatus, id)
+    }
+
 }

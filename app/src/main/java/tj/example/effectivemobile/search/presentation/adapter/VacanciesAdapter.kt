@@ -15,7 +15,8 @@ import tj.example.effectivemobile.search.data.remote.models.VacancyModel
 
 class VacanciesAdapter(
     private val clickedMoreVacancyButton: () -> Unit,
-    private val clickedVacancy: (id : String) -> Unit
+    private val clickedVacancy: (id : String) -> Unit,
+    private val onLikedClicked: (prevStatus : Boolean, id : String) -> Unit,
 ) :
     ListAdapter<VacancyModel, ViewHolder>(VacanciesDiffUtil()) {
 
@@ -41,6 +42,10 @@ class VacanciesAdapter(
                 if (item.isFavorite)
                     binding.likedIcon.setImageResource(R.drawable.ic_liked_yes)
                 else binding.likedIcon.setImageResource(R.drawable.ic_liked_no)
+
+                binding.likedIcon.setOnClickListener {
+                        onLikedClicked(item.isFavorite,item.id)
+                }
 
                 //Title
                 title.text = item.title
