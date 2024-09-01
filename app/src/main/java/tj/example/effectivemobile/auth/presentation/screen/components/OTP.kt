@@ -29,7 +29,7 @@ class OTPinMaster : AppCompatEditText {
     private var mRectangleWidth = 150
     private var mRectangleHeight = 200
     private var rectangleCornerRadius = 30f
-    private var isCorrect = true
+    private var isCorrect = false
     private var density = 0
 
     private var rectanglePaint: Paint? = null
@@ -37,7 +37,7 @@ class OTPinMaster : AppCompatEditText {
 
     private val mPadding = 30
 
-    private var textColor: Int = Color.BLACK
+    private var textColor: Int = Color.WHITE
     private var activeRectangleColor: Int = Color.GREEN
     private var inactiveRectangleColor: Int = Color.GRAY
     private var errorRectangleColor: Int = Color.RED
@@ -134,7 +134,7 @@ class OTPinMaster : AppCompatEditText {
         val filters = arrayOfNulls<InputFilter>(1)
         filters[0] = LengthFilter(mNumMaxLength)
         setFilters(filters)
-        textSize = 42f / density
+        textSize = 78f / density
         setBackgroundResource(androidx.appcompat.R.color.abc_decor_view_status_guard_light)
 
         //Animation characters while input
@@ -250,7 +250,15 @@ class OTPinMaster : AppCompatEditText {
             newRectF!![startX, paddingTop.toFloat(), startX + mRectangleWidth] =
                 bottom.toFloat()
 
+            canvas.drawRoundRect(
+                newRectF!!,
+                rectangleCornerRadius,
+                rectangleCornerRadius,
+                rectanglePaint!!
+            )
+
             if (getText()!!.length > i) {
+
 
                 isCorrect()
 
@@ -261,6 +269,13 @@ class OTPinMaster : AppCompatEditText {
                     animationState
                 } else bottomBaseline
 
+                canvas.drawRoundRect(
+                    newRectF!!,
+                    rectangleCornerRadius,
+                    rectangleCornerRadius,
+                    rectanglePaint!!
+                )
+
                 if (isPin) {
                     drawCircle(startX, canvas, circleRadius!!, circleColor!!)
                 } else {
@@ -269,21 +284,20 @@ class OTPinMaster : AppCompatEditText {
                         paint
                     )
                 }
+
             } else {
                 rectanglePaint!!.color = inactiveRectangleColor
+                canvas.drawRoundRect(
+                    newRectF!!,
+                    rectangleCornerRadius,
+                    rectangleCornerRadius,
+                    rectanglePaint!!
+                )
             }
-
-
-            canvas.drawRoundRect(
-                newRectF!!,
-                rectangleCornerRadius,
-                rectangleCornerRadius,
-                rectanglePaint!!
-            )
 
             //Changing rectangle start position for next character
             startX += if (mSpace < 0) {
-                (mRectangleWidth * 2).toInt()
+                mRectangleWidth * 2
             } else {
                 (mRectangleWidth + mSpace).toInt()
             }
@@ -301,10 +315,10 @@ class OTPinMaster : AppCompatEditText {
     }
 
     private fun isCorrect() {
-        if (text!!.length > mNumMaxLength && !isCorrect) {
+        if (text!!.length >= mNumMaxLength && !isCorrect) {
             rectanglePaint!!.color = errorRectangleColor
         } else {
-            rectanglePaint!!.color = Color.GREEN
+            rectanglePaint!!.color = activeRectangleColor
         }
     }
 

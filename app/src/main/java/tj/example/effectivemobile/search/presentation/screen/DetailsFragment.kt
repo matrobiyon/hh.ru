@@ -2,7 +2,6 @@ package tj.example.effectivemobile.search.presentation.screen
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,7 +25,7 @@ class DetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentDetailsBinding
     private val args by navArgs<DetailsFragmentArgs>()
-    private val viewModel : DetailViewModel by viewModels()
+    private val viewModel: DetailViewModel by viewModels()
     private lateinit var bottomSheetFragment: BottomSheetFragment
 
     override fun onCreateView(
@@ -40,7 +39,9 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getDataById(args.id)
+        viewModel.getDataById(args.id).observe(viewLifecycleOwner) { res ->
+
+        }
 
         observeLiveData()
         binding.back.setOnClickListener {
@@ -50,11 +51,17 @@ class DetailsFragment : Fragment() {
 
     @SuppressLint("SetTextI18n")
     private fun observeLiveData() {
-        viewModel.vacancy.observe(viewLifecycleOwner) { res ->
+        viewModel.getDataById(args.id).observe(viewLifecycleOwner) { list ->
+
+            val res = list.first()
 
             if (res.isFavorite) binding.likedIcon.setImageResource(R.drawable.ic_liked_yes) else binding.likedIcon.setImageResource(
                 R.drawable.ic_liked_no
             )
+
+            binding.likedIcon.setOnClickListener {
+                viewModel.changeStatus(res.isFavorite, res.id)
+            }
 
             binding.apply {
                 title.text = res.title
@@ -75,7 +82,7 @@ class DetailsFragment : Fragment() {
                 observingPeopleContainer.isVisible = res.lookingNumber > 0
                 observingPeople.text =
                     "${res.lookingNumber} ${VacanciesAdapter.getPersonSklonenie(res.lookingNumber)} сейчас смотрят"
-                
+
                 company.text = res.company
                 address.text =
                     "${res.address.town}, ${res.address.street}, ${res.address.house}"
@@ -100,7 +107,7 @@ class DetailsFragment : Fragment() {
         }
     }
 
-    fun createChip(question : String) : Chip {
+    fun createChip(question: String): Chip {
         val chip = ChipItemBinding.inflate(layoutInflater).root
         chip.text = question
         chip.setOnClickListener {

@@ -32,17 +32,33 @@
         android:id="@+id/otp_test"
         android:layout_width="match_parent"
         android:layout_height="58dp"
-        android:layout_marginTop="16dp"
-        app:activeRectangleColor="@color/blue"
+        android:layout_marginTop="28dp"
         app:circleColor="@color/green"
+        app:activeRectangleColor="@color/blue"
         app:inactiveRectangleColor="@color/grey_2"
+        android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:rectangleCount="4"
-        app:rectangleHeight="100dp"
         app:rectangleWidth="100dp" />
+
+<!--    <tj.example.effectivemobile.auth.presentation.screen.components.OTPinMaster-->
+<!--        android:id="@+id/otp_test"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="58dp"-->
+<!--        android:textColor="@color/white"-->
+<!--        app:activeRectangleColor="@color/blue"-->
+<!--        app:circleColor="@color/green"-->
+<!--        app:inactiveRectangleColor="@color/grey_2"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:rectangleCount="4"-->
+<!--        app:rectangleHeight="100dp"-->
+<!--        app:rectangleWidth="100dp" />-->
 
     <androidx.appcompat.widget.AppCompatButton
         android:layout_marginTop="16dp"

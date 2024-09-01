@@ -8,7 +8,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
 import tj.example.effectivemobile.R
 import tj.example.effectivemobile.databinding.FragmentSearchBinding
@@ -48,8 +47,6 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val bottomSheet = BottomSheetDialog(requireActivity().applicationContext)
-        
         binding.rvOffers.adapter = offerAdapter
         binding.rvVacancies.adapter = vacanciesAdapter
 
@@ -71,13 +68,19 @@ class SearchFragment : Fragment() {
     private fun observeViewModel() {
 
         viewModel.apply {
-            offers.observe(viewLifecycleOwner) { res ->
-                offerAdapter.submitList(res)
+
+            getVacancies().observe(viewLifecycleOwner) { res ->
+                viewModel.saveVacanciesInViewModel(res)
+                if (res.isEmpty()) viewModel.getDataRemotely()
+                else if (viewModel.isExpanded.value == false || viewModel.isExpanded.value == null) vacanciesAdapter.submitList(
+                    addButtonToList(viewModel.vacancies)
+                ) else vacanciesAdapter.submitList(viewModel.vacancies.map { VacancyModel(it) })
+
+                binding.vacancyCount.text = VacanciesAdapter.getVacanciesSklonenie(res.count())
             }
 
-            vacancies.observe(viewLifecycleOwner) { res ->
-                vacanciesAdapter.submitList(addButtonToList(res))
-                binding.vacancyCount.text = VacanciesAdapter.getVacanciesSklonenie(res.count())
+            getOffer().observe(viewLifecycleOwner) { res ->
+                offerAdapter.submitList(res)
             }
 
             isLoading.observe(viewLifecycleOwner) { res ->
@@ -86,7 +89,11 @@ class SearchFragment : Fragment() {
 
             isExpanded.observe(viewLifecycleOwner) { res ->
                 if (res == true) {
-                    vacanciesAdapter.submitList(viewModel.vacancies.value?.map { VacancyModel(it) })
+                    vacanciesAdapter.submitList(viewModel.vacancies.map {
+                        VacancyModel(
+                            it
+                        )
+                    })
                     binding.rvOffers.isVisible = false
                     binding.extraInfo.isVisible = true
                     binding.tabIcon.setImageResource(R.drawable.ic_back)
@@ -99,7 +106,11 @@ class SearchFragment : Fragment() {
                     binding.tabIcon.setImageResource(R.drawable.ic_search)
                     binding.rvOffers.isVisible = true
                     binding.vacanciesTitle.isVisible = true
-                    vacanciesAdapter.submitList(viewModel.vacancies.value?.let { addButtonToList(it) })
+                    vacanciesAdapter.submitList(
+                        addButtonToList(
+                            viewModel.vacancies
+                        )
+                    )
                 }
             }
 

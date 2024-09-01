@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import tj.example.effectivemobile.MainActivity
 import tj.example.effectivemobile.R
@@ -25,11 +26,15 @@ class CheckAuthFragment : Fragment() {
         val hasEntered = (requireActivity() as MainActivity).hasEnteredAccount
 
         if (hasEntered) {
-//            findNavController().popBackStack(R.id.checkAuthFragment,true)
-            findNavController().navigate(CheckAuthFragmentDirections.actionCheckAuthFragmentToSearchFragment())
-        }else {
-//            findNavController().popBackStack(R.id.checkAuthFragment,true)
-            findNavController().navigate(CheckAuthFragmentDirections.actionCheckAuthFragmentToAuthFragment())
+            findNavController().navigate(
+                CheckAuthFragmentDirections.actionCheckAuthFragmentToSearchFragment(),
+                navOptions = NavOptions.Builder().setPopUpTo(R.id.checkAuthFragment, true).build()
+            )
+        } else {
+            findNavController().navigate(CheckAuthFragmentDirections.actionCheckAuthFragmentToAuthFragment(),
+                navOptions = NavOptions.Builder().setPopUpTo(R.id.checkAuthFragment, true).build()
+                )
+
         }
     }
 

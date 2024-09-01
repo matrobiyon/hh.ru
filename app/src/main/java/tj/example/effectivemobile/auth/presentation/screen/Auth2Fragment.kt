@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import tj.example.effectivemobile.MainActivity
@@ -34,8 +35,11 @@ class Auth2Fragment : Fragment() {
             binding.otpTest.setIsCorrect(true)
             binding.otpTest.text?.clear()
             (requireActivity() as MainActivity).hasEnteredAccount = true
-            findNavController().navigate(Auth2FragmentDirections.actionAuthOtpFragmentToSearchFragment())
-//            findNavController().popBackStack(R.id.auth_otp_Fragment,true)
+            findNavController().navigate(
+                Auth2FragmentDirections.actionAuthOtpFragmentToSearchFragment(),
+                navOptions = NavOptions.Builder().setPopUpTo(R.id.authFragment, true)
+                    .build()
+            )
         }
     }
 

@@ -1,5 +1,6 @@
 package tj.example.effectivemobile.search.presentation.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -113,7 +114,7 @@ class VacanciesAdapter(
         const val BUTTON_TYPE = 2
 
         fun getVacanciesSklonenie(count: Int): String {
-            return count.toString() + " " + when {
+            return "$count " + when {
                 count % 10 == 1 && count != 11 -> "вакансия"
                 count % 10 in 2..4 && count !in 12..14 -> "вакансии"
                 else -> "вакансий"
@@ -130,8 +131,6 @@ class VacanciesAdapter(
             }
         }
     }
-
-
 }
 
 fun formatPublishedDate(publishedDate: String): String {

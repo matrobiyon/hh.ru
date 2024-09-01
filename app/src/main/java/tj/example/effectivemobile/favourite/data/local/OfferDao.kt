@@ -1,5 +1,6 @@
 package tj.example.effectivemobile.favourite.data.local
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -11,7 +12,7 @@ import tj.example.effectivemobile.search.data.remote.models.Offer
 interface OfferDao {
 
     @Query("SELECT * FROM offer")
-    suspend fun getData(): List<Offer>
+    fun getOffers(): LiveData<List<Offer>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE, entity = OfferEntity::class)
     suspend fun saveOffers(offer: List<Offer>)

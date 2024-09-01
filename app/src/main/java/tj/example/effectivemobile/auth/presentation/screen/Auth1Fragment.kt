@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-import tj.example.effectivemobile.MainActivity
 import tj.example.effectivemobile.R
 import tj.example.effectivemobile.databinding.FragmentAuth1Binding
 
@@ -57,7 +57,10 @@ class Auth1Fragment : Fragment() {
                 if (isValidEmail(binding.editTextAuth1.text.toString().trim())) {
                     val directions =
                         Auth1FragmentDirections.actionAuthFragmentToAuthOtpFragment(email = binding.editTextAuth1.text.toString())
-                    findNavController().navigate(directions)
+                    findNavController().navigate(directions,
+//                        navOptions = NavOptions.Builder().setPopUpTo(R.id.authFragment, true)
+//                            .build()
+                    )
 
                 } else {
                     isError = true

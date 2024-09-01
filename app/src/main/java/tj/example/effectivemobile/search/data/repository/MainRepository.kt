@@ -1,5 +1,6 @@
 package tj.example.effectivemobile.search.data.repository
 
+import androidx.lifecycle.LiveData
 import kotlinx.coroutines.flow.Flow
 import tj.example.effectivemobile.core.Resource
 import tj.example.effectivemobile.core.callGenericRequest
@@ -24,15 +25,15 @@ class MainRepository @Inject constructor(
             api.getData()
         }
 
-    suspend fun getDataById(id : String) : List<Vacancy> {
+    fun getDataById(id : String) : LiveData<List<Vacancy>> {
         return vacancyDao.getVacanciesById(id)
     }
 
-    suspend fun getOffersLocally(): List<Offer> {
-        return offerDao.getData()
+    fun getOffersLocally(): LiveData<List<Offer>> {
+        return offerDao.getOffers()
     }
 
-    suspend fun getVacanciesLocally() : List<Vacancy>{
+    fun getVacanciesLocally() : LiveData<List<Vacancy>>{
         return vacancyDao.getVacancies()
     }
 
