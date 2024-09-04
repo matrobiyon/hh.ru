@@ -1,5 +1,5 @@
 <h1 align="center">HH.ru analogue</a></h1>
-<h3 align="center">App for experimental purposing in a short period of time</h3>
+<h3 align="center">App for experimental purposes in a short period of time</h3>
 
 <img src="https://github.com/user-attachments/assets/74244a1b-7f0a-4377-9922-c46a867e87c1" height="400">
 <img src="https://github.com/user-attachments/assets/4e635593-052a-4cd4-96ff-4639f51879e0" height="400">
